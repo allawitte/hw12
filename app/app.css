@@ -23,3 +23,18 @@
   content: "|";
   padding-right: 0.3em;
 }
+.grass {
+	color: #36A922;
+}
+.electric {
+	color: #E4E340;
+}
+.normal {
+	color: #8D6412;
+}
+.fire {
+	color:#D61608;
+}
+.water {
+	color:#3172D6;
+}

@@ -8,8 +8,31 @@ angular.module('myApp.view1', ['ngRoute'])
             controller: 'View1Ctrl'
         });
     }])
+	.filter('poktype', function() {
+		return function(items, type) { 
+			console.log(items);
+			console.log(type);
+			var arr = [];
+			if (!type) {
+				return items;
+			}
+			if (Array.isArray(items)) {
+				items.forEach(function(item) {
+					
+					item.type.forEach(function(itm){
+						
+						if(itm == type) {
+							arr.push(item);
+						}
+					});
+				});
+				return arr;
+			}
+			
+	};
+})
 
-    .controller('View1Ctrl', function ($scope) {
+    .controller('View1Ctrl', function ($scope, $filter) {
         $scope.pokemons = [{
             "abilities": [
                 "Overgrow"
@@ -120,6 +143,27 @@ angular.module('myApp.view1', ['ngRoute'])
             ]
         }];
 
-        $scope.myOrderProperty = 'id';
+        
+		$scope.sortRevers = false;
+		$scope.pockemonOpt = [
+			{name: 'id', title: 'ID', dir:false, id: 0},
+			{name: 'weight', title: 'Вес', dir:false, id: 1},
+			{name: 'height', title: 'Рост', dir:false, id: 2},
+			{name: 'name', title: 'Имя', dir:false, id: 3},
+			{name: 'weight', title: 'Вес по убыванию', dir:true, id: 4}
+		];
+		$scope.myOrderProperty = $scope.pockemonOpt[0];
+		$scope.sortOpt = 'id';
+		$scope.direction = function(){
+			$scope.sortOpt = $scope.myOrderProperty.name;
+			$scope.sortRevers = $scope.myOrderProperty.dir;
+			
+		}
+		 $scope.pokemons2 = $scope.pokemons;
+    
+    $scope.$watch('type', function(val)
+    { 
+        $scope.pokemons = $filter('poktype')($scope.pokemons2, val);
+    });
 
     });
