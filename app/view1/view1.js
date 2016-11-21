@@ -143,7 +143,13 @@ angular.module('myApp.view1', ['ngRoute'])
             ]
         }];
 
-        
+        $scope.showName = function(id) {
+            $scope.pokemons.forEach(function(item, ind) {
+                if ( item.id == id) {
+                    alert(item.name);
+                }
+            })
+        }
 		$scope.sortRevers = false;
 		$scope.pockemonOpt = [
 			{name: 'id', title: 'ID', dir:false, id: 0},

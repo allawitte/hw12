@@ -15,7 +15,7 @@
 
 <ul>
     <li ng-repeat="pokemon in pokemons | filter: myQuery | orderBy: sortOpt:sortRevers">
-        <img src="{{pokemon.ThumbnailImage}}">
+        <img src="{{pokemon.ThumbnailImage}}" ng-click="showName(pokemon.id)">
 
         <small>ID #{{pokemon.id }}</small>
         <h1 ng-class="pokemon.type[0]">{{pokemon.name}}</h1>
